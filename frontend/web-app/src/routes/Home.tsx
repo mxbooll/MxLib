@@ -6,7 +6,7 @@ type CardProps = {
     paragraph?: string
 }
 
-const home = ({ title, paragraph }: CardProps) =>{
+const Home = ({ title, paragraph }: CardProps) =>{
     const [counter, setCounter] = useState(0)
 
     return (
@@ -19,5 +19,5 @@ const home = ({ title, paragraph }: CardProps) =>{
     )
 }
 
-export default home
+export default Home
 
