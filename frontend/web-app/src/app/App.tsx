@@ -1,8 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import React from "react";
 
-import test from './test.module.css'
-import Home from './routes/Home'
+import test from '../test.module.css'
+import Home from '../routes/Home'
 
 export default function App() {
   console.log(test)

@@ -1,9 +1,13 @@
 import ReactDOM from "react-dom/client";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import App from "./App";
+import App from "./app/App";
 import { Provider } from 'react-redux'
 import store from "./store/store";
+
+import 'sanitize.css';
+import 'sanitize.css/forms.css';
+import 'sanitize.css/typography.css';
 
 // https://stackoverflow.com/a/63520782
 const portalDiv = document.getElementById("root");
