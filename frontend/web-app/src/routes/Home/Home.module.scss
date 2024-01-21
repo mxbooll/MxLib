@@ -1,62 +1,241 @@
+
+// @import "./dynamic.css";
 @use 'breakpoints.scss' as *;
 @use 'test.module.scss' as *;
 
-#home-button {
-    cursor: pointer;
-    background-color: antiquewhite;
-    width: 250px;
+// These constants will match the bookmark.SVG default size.
+// Used for resize calculations
+$bookmarkWidth: 26px;
+$bookmarkHeight: 23px;
+
+
+/* Begin TitleBar Styling */
+.titleBar{
     height: 50px;
-    user-select: none;
-}
-
-#libraryShelf {
     width: 100%;
-    height: 100%;
-    background-color: blue;
-    display: flex;
-    flex-flow: wrap;
-    justify-content: left;
-    gap: 40px;
-    padding: 0.5rem;
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap:25px;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom:25px;
 }
 
-.test{
-    color:green;
+.titleBar div:first-of-type{
+    margin-right: auto;
+    margin-left: 20px;
+    font-weight: bold;
+    font-size: 24px;
+}
+.titleBar svg:last-of-type{
+    margin-right: 25px;
 }
 
-.boxPlaceholder {
-    width: 100px;
-    height: 150px;
-    background-color: red;
-}
+/* End TitleBar Styling */
 
-:root{
-    $base-color: #c6538c;
-    --BC: green;
-}
 
+
+
+/* Begin Book Case */
 .bookCase {
     width: 100%;
     height: 100%;
-
-    background-color: var(--BC);
     display: grid;
     justify-content: center;
-    grid-template-columns: repeat(auto-fill, 100px);
-
+    gap: 5px 5px;
+    grid-template-columns: repeat(auto-fill, var(--book-width));
+    grid-template-rows: repeat(auto-fill, var(--book-height));
 }
 
+// Begin resize styles
+
 @include lt-md{
-    :root{
-        --BC: green !important;
+    .bookCase, .boxPlaceholder{
+        --book-width: 100px;
+        --book-height: 150px;
         $base-color: salmon;
     }
+    .boxBottomBar > div{
+        font-size:8px;
+    }
+}
+
+@include gt-sm{
+    .bookCase, .boxPlaceholder{
+        $ScaleFactor: 1.25;
+        --book-width: calc(100px * #{$ScaleFactor});
+        --book-height: calc(150px * #{$ScaleFactor});
+    }
+
+}
+
+@include gt-lg{
+    .bookCase, .boxPlaceholder{
+        $ScaleFactor: 1.75;
+        --book-width: calc(100px * #{$ScaleFactor});
+        --book-height: calc(150px * #{$ScaleFactor});
+    }
+    .boxBottomBar > div{
+        font-size:14px;
+    }
+}
+/* End Book Case */
 
 
+
+
+
+
+/* Begin Book styles */
+
+.boxPlaceholder {
+    width: var(--book-width);
+    height: var(--book-height);
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 3fr 1fr;
+    cursor:pointer;
+    // V1
+    // box-shadow: inset 0px -40px 40px rgba(0, 0, 0, 0.7);
+    // v2 - Improved shader, Perfect for one line
+    // box-shadow: inset 0px -80px 20px -60px rgba(0,0,0,1);
+    // V3
+    // box-shadow: inset 0px -160px 30px -130px rgba(0,0,0,1);
+    // V4 for usage when all other elements are removed
+    box-shadow: inset 0px -180px 30px -160px rgb(0 0 0 / 71%);
+}
+
+.bookImageContainer{
+    grid-row: 1/3;
+    grid-column: 1;
+    align-self: end;
+
+    max-height: 100%;
+    display:grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 3fr;
+}
+
+
+.boxTopBar{
+    display:grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: auto 3fr;
+    height: 25px;
+    width:100%;
+    grid-column: 1;
+    grid-row: 1;
+    z-index: 1;
+}
+.boxTopBar > div{
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 12px;
+    text-align: center;
+    color:white;
+    // font-weight:bold;
+    font-weight: 500;
+    padding-top: 5px;
+
+    margin-left:10px;
+}
+.boxTopBar > svg:first-of-type{
+    grid-column: 1;
+    grid-row: 1;
+    transform-origin: 0% 0%;
+    scale: 1.5;
+    width: calc(#{$bookmarkWidth} * 1.5);
+    z-index: -1;
+    margin-left:10px;
+}
+
+.boxTopBar svg:last-of-type{
+    grid-column: 2;
+    justify-self: end;
+    color: white;
+    // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    filter: drop-shadow(0px 2px 1px rgba(0, 0, 0, .75));
+    transform-origin: 0% 0%;
+    scale: 1.25;
+}
+@include gt-lg{
+    .boxTopBar > svg:last-of-type{
+        transform-origin: 50% 0%;
+        scale: 1.5;
+    }
+    .boxTopBar > svg:first-of-type{
+        scale: 1.75;
+        width: calc(#{$bookmarkWidth} * 1.75);
+    }
+    .boxTopBar > div{
+        font-size: 14px;
+    }
 }
 
 @include lt-md{
-    #libraryShelf {
-        background-color: black;
+    .boxTopBar > svg:last-of-type{
+        // transform-origin: 50% 0%;
+        // scale: 1;
+        display: none;
     }
+    .boxTopBar > svg:first-of-type{
+        scale: 1;
+        width: calc(#{$bookmarkWidth} * 1);
+    }
+    .boxTopBar > div{
+        font-size: 8px;
+        padding-top:3px;
+    }
+
 }
+
+.bookImage{
+    object-fit: revert-layer;
+    align-self: end;
+    width:100%;
+    max-height: 100%;
+    grid-row: 1/3;
+    grid-column: 1;
+    z-index: -1;
+}
+
+
+.boxBottomBar{
+    width:100%;
+    height: 40px;
+    display:flex;
+    flex-direction: row;
+    align-items: end;
+    color:white;
+    text-align: center;
+    grid-column: 1;
+    grid-row: 2;
+    align-self: flex-end;
+    padding-bottom:2px;
+}
+.boxBottomBar > div{
+    flex-grow:1;
+    font-size: 10px;
+}
+.boxBottomBar > svg{
+    cursor:pointer;
+    flex-basis:25%;
+}
+
+
+.boxBottomBar > div:first-of-type{
+    font-weight: bold;
+    // flex-grow:3;
+    text-overflow:clip;
+    overflow: hidden;
+    // white-space: nowrap;
+    // flex-basis:75%;
+    // word-break: break-all;
+    // background: #000000b5;
+    border-radius: 0px 5px;
+    margin-left: 3px;
+    // @include stroke(3, #000000);
+    flex-basis: 75%;
+
+}
+

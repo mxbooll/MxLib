@@ -2,7 +2,9 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
+
 const isDevelopment = process.env.NODE_ENV !== 'production';
+
 
 module.exports = {
     //...
@@ -29,7 +31,7 @@ module.exports = {
                     // Use babel-loader (Babel transpiler) for JS Files
                     loader: "babel-loader",
                     options: {
-                        plugins: [isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean),
+                        plugins: ["tsconfig-paths-module-resolver", isDevelopment && require.resolve('react-refresh/babel')].filter(Boolean), // This object is copied from react-refresh-webpack-plugin documentation
                         // preset-react, preset-env = React support and latest JS Support
                         presets: [
                             '@babel/preset-react',
@@ -85,23 +87,33 @@ module.exports = {
                     },
                 ],
             },
+            {
+                test: /\.svg$/i,
+                issuer: /\.[jt]sx?$/,
+                use: ['@svgr/webpack'],
+            },
+            {
+                test: /\.(png|jpg|gif|webp)$/i,
+                type: 'asset/resource'
+            }
         ],
     },
 
     // Specifies html template (Which has the root component which react mounts to)
+    // Will inject the script tag by default. Script tag links ALL webpack bundles
     plugins: [new HtmlWebpackPlugin({
         template: 'public/template.html',
     }),
-    isDevelopment && new ReactRefreshWebpackPlugin()
+        isDevelopment && new ReactRefreshWebpackPlugin() // Copied from react-refresh-webpack-plugin documentation
     ].filter(Boolean),
 
     // Source map for debugging
     devtool: 'source-map',
 
-
+    // webpack-dev-server is a lightweight express server that serves all output bundles from webpack. Supports hot reload.
     devServer: {
         static: {
-            directory: path.join(__dirname, 'public'),
+            directory: path.join(__dirname, 'public'), // Will also serve these static files
         },
         compress: true,
         port: 9000,
