@@ -2,9 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-
 const isDevelopment = process.env.NODE_ENV !== 'production';
-
 
 module.exports = {
     //...
@@ -45,7 +43,7 @@ module.exports = {
                 }
             },
             {
-                test: /\.css$/i,
+                test: /\.(sc|c)ss$/i,
                 use: [
                     "style-loader", // Allow import styles
                     {
@@ -77,6 +75,14 @@ module.exports = {
                             },
                         },
                     },
+                    { loader: "sass-loader",
+                        options: {
+                            sourceMap: true,
+                            sassOptions: {
+                                includePaths: [path.resolve(__dirname, 'src/utils/styles')],
+                            },
+                        }
+                    },
                 ],
             },
         ],
@@ -102,6 +108,6 @@ module.exports = {
     },
     // https://stackoverflow.com/questions/63151999/webpack-and-babel-loader-not-resolving-ts-and-tsx-modules
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.json', '.css']
+        extensions: ['.ts', '.tsx', '.js', '.json', '.css','.scss']
     }
 };

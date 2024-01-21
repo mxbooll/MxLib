@@ -1,20 +1,27 @@
-import React, { useState } from 'react'; // we need this to make JSX compile
-import styles from './Home.module.css'
+import React, { useState } from 'react';
+
+import styles from './Home.module.scss'
 
 const Home = () =>{
-    console.log("High level rerender")
+
     return (
-        <div>
+        <>
             <Shelf/>
             Hello World
-        </div>
+        </>
     )
 }
 
 const Shelf = () =>{
     return (
-        <div id={styles.libraryShelf}>
-            shelf
+        <div>
+            hi
+            <div className={styles.bookCase}></div>
+            <div className={styles.boxPlaceholder}></div>
+            <div className={styles.boxPlaceholder}></div>
+            <div className={styles.boxPlaceholder}></div>
+            <div className={styles.boxPlaceholder}></div>
+            <div className={styles.boxPlaceholder}></div>
         </div>
     )
 }
