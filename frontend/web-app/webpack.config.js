@@ -79,7 +79,7 @@ module.exports = {
                         options: {
                             sourceMap: true,
                             sassOptions: {
-                                includePaths: [path.resolve(__dirname, 'src/utils/styles')],
+                                includePaths: [path.resolve(__dirname, 'src/shared/styles/global')],
                             },
                         }
                     },
@@ -90,7 +90,7 @@ module.exports = {
 
     // Specifies html template (Which has the root component which react mounts to)
     plugins: [new HtmlWebpackPlugin({
-        template: 'src/template.html',
+        template: 'public/template.html',
     }),
     isDevelopment && new ReactRefreshWebpackPlugin()
     ].filter(Boolean),
