@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'; // we need this to make JSX compile
 
 import styles from './Home.module.scss'
 
@@ -14,9 +14,8 @@ const Home = () =>{
 
 const Shelf = () =>{
     return (
-        <div>
+        <div className={styles.bookCase}>
             hi
-            <div className={styles.bookCase}></div>
             <div className={styles.boxPlaceholder}></div>
             <div className={styles.boxPlaceholder}></div>
             <div className={styles.boxPlaceholder}></div>

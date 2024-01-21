@@ -1,12 +1,12 @@
 @use 'breakpoints.scss' as *;
-// @forward 'breakpoints.module.scss';
+@use 'test.module.scss' as *;
+
 #home-button {
     cursor: pointer;
     background-color: antiquewhite;
     width: 250px;
     height: 50px;
     user-select: none;
-    color: var(--some-color);
 }
 
 #libraryShelf {
@@ -30,12 +30,29 @@
     background-color: red;
 }
 
+:root{
+    $base-color: #c6538c;
+    --BC: green;
+}
+
 .bookCase {
     width: 100%;
     height: 100%;
-    background-color: purple;
-    display: flex;
+
+    background-color: var(--BC);
+    display: grid;
     justify-content: center;
+    grid-template-columns: repeat(auto-fill, 100px);
+
+}
+
+@include lt-md{
+    :root{
+        --BC: green !important;
+        $base-color: salmon;
+    }
+
+
 }
 
 @include lt-md{
