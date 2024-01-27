@@ -1,12 +1,14 @@
-import { Routes, Route, Link } from "react-router-dom";
+import {Route, createRoutesFromElements } from "react-router-dom";
 import React from "react";
 
 import Home from './Home/Home'
+import Reader from "./Reader/Reader";
 
-export default function App() {
-    return (
-        <Routes>
+export default (
+    createRoutesFromElements(
+        <>
             <Route path="/" element={<Home />} />
-        </Routes>
-    );
-}
+            <Route path="/reader" element={<Reader />} />
+        </>
+    )
+);

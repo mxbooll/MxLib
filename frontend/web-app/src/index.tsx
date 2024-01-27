@@ -1,11 +1,12 @@
 import ReactDOM from "react-dom/client";
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Router from "./routes/Router";
 
 import 'sanitize.css';
 import 'sanitize.css/forms.css';
 import 'sanitize.css/typography.css';
+// import './utils/styles/breakpoints.css'
 
 import store from './store/store'
 import { Provider } from 'react-redux'
@@ -23,11 +24,8 @@ const root = ReactDOM.createRoot(
 
 
 root.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <BrowserRouter>
-                <Router />
-            </BrowserRouter>
-        </Provider>
-    </React.StrictMode>
+    // <React.StrictMode>
+    <Provider store={store}>
+        <RouterProvider router={createBrowserRouter(Router)} />
+    </Provider>
 );

@@ -93,9 +93,9 @@ module.exports = {
                 use: ['@svgr/webpack'],
             },
             {
-                test: /\.(png|jpg|gif|webp)$/i,
+                test: /\.(png|jpg|gif|webp|epub|txt)$/i,
                 type: 'asset/resource'
-            }
+            },
         ],
     },
 
@@ -117,6 +117,10 @@ module.exports = {
         },
         compress: true,
         port: 9000,
+        // https://stackoverflow.com/a/36623117
+        // https://ui.dev/react-router-cannot-get-url-refresh
+        // This will fix the issue where loading the website outside of / will cause the route not to be found
+        historyApiFallback: true
     },
     // https://stackoverflow.com/questions/63151999/webpack-and-babel-loader-not-resolving-ts-and-tsx-modules
     resolve: {
