@@ -1,7 +1,7 @@
 import React, { createRef, ReactPropTypes, RefObject, useEffect, useRef, useState } from 'react'; // we need this to make JSX compile
 import styles from './ReaderView.module.scss'
 import epubjs, { Book, Rendition } from 'epubjs-myh'
-import bookImport from 'public/placeholder/courage.epub'
+import bookImport from '@resources/placeholder/courage.epub'
 import View, { ViewSettings } from 'epubjs-myh/types/managers/view';
 import redrawAnnotations from './functions/redrawAnnotations';
 

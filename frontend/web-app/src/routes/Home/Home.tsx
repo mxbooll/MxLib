@@ -2,22 +2,22 @@ import React, { useState } from 'react'; // we need this to make JSX compile
 
 import styles from './Home.module.scss'
 
-import Test from 'public/feathericons/more-vertical.svg'
-import Search from 'public/feathericons/search.svg'
-import Filter from 'public/feathericons/filter.svg'
-import Settings from 'public/feathericons/settings.svg'
+import Test from '@resources/feathericons/more-vertical.svg'
+import Search from '@resources/feathericons/search.svg'
+import Filter from '@resources/feathericons/filter.svg'
+import Settings from '@resources/feathericons/settings.svg'
 
-import Boomark from 'public/figma/Bookmark.svg'
+import Boomark from '@resources/figma/Bookmark.svg'
 
-import moby from "public/images/mobydick.jpg"
-import martian from "public/images/martian.jpg"
-import four from "public/images/451.jpg"
-import thousand from "public/images/1001.jpg"
-import onenine from "public/images/1984.webp"
-import af from "public/images/af.jpg"
-import tcr6 from "public/images/tcr6.jpg"
-import gg from "public/images/gg.jpg"
-import jah from "public/images/jah.jpg"
+import moby from "@resources/images/mobydick.jpg"
+import martian from "@resources/images/martian.jpg"
+import four from "@resources/images/451.jpg"
+import thousand from "@resources/images/1001.jpg"
+import onenine from "@resources/images/1984.webp"
+import af from "@resources/images/af.jpg"
+import tcr6 from "@resources/images/tcr6.jpg"
+import gg from "@resources/images/gg.jpg"
+import jah from "@resources/images/jah.jpg"
 import { Link } from "react-router-dom";
 // import t from ""
 
