@@ -42,10 +42,14 @@
   transition: 0.3s;
 }
 
-.optionsToggled > div{
-  color:rgba(0, 0, 0, 0.342);
+.optionsToggled{
   opacity: 0;
   pointer-events: none;
+}
+
+.title{
+  // color:rgba(0, 0, 0, 0.342);
+  color:black;
 }
 
 .menuButtonContainer > svg{
@@ -88,4 +92,18 @@
   display: flex;
   align-items: center;
   transition: 0.3s;
+}
+
+
+
+
+.opaqueScreen{
+  width: 100%;
+}
+.opaqueScreenActive{
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  pointer-events: auto;
+  grid-area: 2/1/4/1;
+  z-index: 0;
 }
