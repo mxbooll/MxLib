@@ -15,14 +15,13 @@ import { connect, ConnectedProps } from 'react-redux'
 
 
 import store, {RootState} from '@store/store'
-import {AddRendition, ToggleMenu} from '@store/slices/bookStateSlice'
-import DialogPopup from "./DialogPopup/DialogPopupV2";
-
+import {AddRendition, ToggleMenu, SetLoadState, LOADSTATE} from '@store/slices/bookStateSlice'
+import DialogPopup from './DialogPopup/DialogPopupV2';
 const mapState = (state: RootState) => ({
     testState: state.bookState[0],
 })
 
-const connector = connect(mapState, {AddRendition, ToggleMenu})
+const connector = connect(mapState, {AddRendition, ToggleMenu, SetLoadState})
 
 type PropsFromRedux = ConnectedProps<typeof connector>
 
@@ -64,6 +63,16 @@ class Reader extends React.Component<PropsFromRedux>{
 
         this.rendition.book.loaded.spine.then((x)=>{
             this.props.AddRendition(this.rendition)
+
+        })
+
+        book.ready.then(async ()=>{
+            console.log("BOOK READY")
+            await book.locations.generate(1000)
+            console.log("LOCATIONS GENERATED")
+            this.props.SetLoadState({view:0, state:LOADSTATE.COMPLETE})
+
+
         })
 
 
