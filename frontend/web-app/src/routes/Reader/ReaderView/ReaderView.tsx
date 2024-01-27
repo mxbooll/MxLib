@@ -2,7 +2,6 @@ import React, { createRef, ReactPropTypes, RefObject, useEffect, useRef, useStat
 import styles from './ReaderView.module.scss'
 import epubjs, { Book, Rendition } from 'epubjs-myh'
 import bookImport from 'public/placeholder/courage.epub'
-// import bookImport from '../../../../public/placeholder/courage.txt'
 import View, { ViewSettings } from 'epubjs-myh/types/managers/view';
 import redrawAnnotations from './functions/redrawAnnotations';
 
@@ -21,9 +20,13 @@ class Reader extends React.Component<ReaderProps>{
     private renderWindow = createRef<HTMLDivElement>()
     private book!:Book;
     private rendition!: Rendition;
+    private UID!:string;
 
     constructor(props:ReaderProps){
         super(props)
+
+        // This is used to ensure that in the case multiple renditions are on the page, there will not be conflicts
+        this.UID = Math.random().toString()
     }
 
     updateSize(rendition:Rendition, renderWindow:RefObject<HTMLDivElement>){
@@ -41,6 +44,8 @@ class Reader extends React.Component<ReaderProps>{
         this.rendition.themes.default({
             body: { "padding-top": "10px !important" },
         })
+
+        console.log(book)
 
         // When Instantiated, pass up rendition instance
         this.props.onRenditionInstance(this.rendition)
@@ -70,7 +75,7 @@ class Reader extends React.Component<ReaderProps>{
     }
     render(): React.ReactNode {
         return(
-            <div className={styles.epubContainer} id={"BookArea"} ref={this.renderWindow}/>
+            <div className={styles.epubContainer} id={"BookArea" + this.UID} ref={this.renderWindow}/>
 
         )
     }
