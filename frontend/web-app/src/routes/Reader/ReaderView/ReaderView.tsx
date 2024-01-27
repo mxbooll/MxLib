@@ -16,7 +16,7 @@ import { connect, ConnectedProps } from 'react-redux'
 
 import store, {RootState} from '@store/store'
 import {AddRendition, ToggleMenu} from '@store/slices/bookStateSlice'
-import DialogPopup from "./DialogPopup/DialogPopup";
+import DialogPopup from "./DialogPopup/DialogPopupV2";
 
 const mapState = (state: RootState) => ({
     testState: state.bookState[0],
