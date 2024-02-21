@@ -9,7 +9,7 @@ import store, {RootState} from '@store/store'
 import {AddHighlight, ChangeHighlightColor, DeleteHighlight, ChangeHighlightNote} from '@store/slices/bookStateSlice'
 
 // Transferred Imports
-import styles from './DialogPopup.module.scss'
+import styles from '../DialogPopup/DialogPopup.module.scss'
 import Copy from '@resources/iconmonstr/iconmonstr-copy-9.svg'
 import Book from '@resources/iconmonstr/iconmonstr-book-26.svg'
 import Search from '@resources/iconmonstr/iconmonstr-magnifier-2.svg'
